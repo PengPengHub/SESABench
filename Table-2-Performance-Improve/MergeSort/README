@@ -1,0 +1,9 @@
+Build:
+
+klee-l++ -o mergeSort_main.o mergeSort_main.cpp -D_SYM
+gklee-nvcc -o mergeSort.o mergeSort.c
+
+Run:
+
+gklee --symbolic-config mergeSort
+
