@@ -16,11 +16,9 @@
 ////////////////////////////////////////////////////////////////////////////////
 typedef unsigned int uint;
 
-//#define SHARED_SIZE_LIMIT 1024U
-#define SHARED_SIZE_LIMIT 8U
-//#define     SAMPLE_STRIDE 128
-
-
+#ifndef SHARED_SIZE_LIMIT 
+#error SHARED_SIZE_LIMIT must be defined
+#endif
 
 ////////////////////////////////////////////////////////////////////////////////
 // Extensive sort validation routine

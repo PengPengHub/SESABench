@@ -114,13 +114,13 @@ extern "C" void bitonicSortShared(
     uint factorizationRemainder = factorRadix2(&log2L, arrayLength);
     assert( factorizationRemainder == 1 );
 
+    printf("batchSize: %d, arryLength: %d, SHARED_SIZE_LIMIT: %d \n", batchSize, arrayLength, SHARED_SIZE_LIMIT);
     uint  blockCount = batchSize * arrayLength / SHARED_SIZE_LIMIT;
     uint threadCount = SHARED_SIZE_LIMIT / 2;
 
     assert(arrayLength <= SHARED_SIZE_LIMIT);
     assert( (batchSize * arrayLength) % SHARED_SIZE_LIMIT == 0 );
 
-    printf("blockCount: %d, threadCount: %d\n", blockCount, threadCount);
     bitonicSortSharedKernel<<<blockCount, threadCount>>>(d_DstKey, d_DstVal, d_SrcKey, d_SrcVal, arrayLength, sortDir);
     //cutilCheckMsg("bitonicSortSharedKernel<<<>>> failed!\n");
 }
