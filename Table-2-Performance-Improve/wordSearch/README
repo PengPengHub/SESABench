@@ -1,0 +1,8 @@
+[Build:]  
+gklee-nvcc -o workSearch_16 search.cu -DNUM1=32 -DNUM2=16
+sesa < wordSearch_16 > wordSearch_16.new 2>&1
+
+
+[Run:]
+gklee --symbolic-config wordSearch_16.new 
+gklee --symbolic-config --race-prune wordSearch_16.new 
