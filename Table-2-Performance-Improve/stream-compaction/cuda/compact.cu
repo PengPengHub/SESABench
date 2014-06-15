@@ -1,7 +1,9 @@
 #include <cassert>
 #include <cstdio>
 
-#define N 64
+#ifndef N
+#error N must be defined
+#endif
 
 #define PREDICATE(x) (((x & 1) == 0) ? 1 : 0)
 
@@ -75,18 +77,6 @@ int main(int argc, char **argv) {
 
   // memcpy back the result
   cudaMemcpy(out, d_out, ArraySize, cudaMemcpyDeviceToHost);
-
-#ifndef _SYM
-  // check results
-  unsigned idx = 0;
-  for (unsigned i=0; i<N; ++i) {
-    if (PREDICATE(in[i])) {
-      assert(out[idx] == in[i]);
-      idx++;
-    }
-  }
-  printf("TEST PASSED\n");
-#endif
 
   // cleanup
   free(in);
